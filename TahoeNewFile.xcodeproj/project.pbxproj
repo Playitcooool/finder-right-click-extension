@@ -1,0 +1,547 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0E4433E691A65A2A83BA025E /* TahoeManagedRootsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF4491FB45DEB1723035C1F /* TahoeManagedRootsStore.m */; };
+		17E560918A0E6B7E23B041FC /* TahoeFinderSync.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E9FE7559105C4F444B0C9A05 /* TahoeFinderSync.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		21400E463085C07E3DFBC206 /* TahoeConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF32E9EE4067E8362D17440 /* TahoeConstants.m */; };
+		29662D41426055F72E71F5F0 /* TahoeConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF32E9EE4067E8362D17440 /* TahoeConstants.m */; };
+		2DBFE33BF51CFC53B282D837 /* TahoeFileWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5593F75F33B9A5B534DB137F /* TahoeFileWriter.m */; };
+		4B2ED893C649703C49A7DC86 /* TahoeHostApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E5D16BF04DD2601F676222 /* TahoeHostApp.swift */; };
+		6F4C00FE231D35EBE99FD23D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425FA67ADD41719558030B0 /* ContentView.swift */; };
+		7C12688C0604271F83DF36EC /* TahoeHostSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70176A81F6997EB3B3730280 /* TahoeHostSupport.swift */; };
+		7DBC5FE83AADB6A9B91A74B1 /* Blank.docx in Resources */ = {isa = PBXBuildFile; fileRef = 12FEEE8CAA535EB965D9C153 /* Blank.docx */; };
+		A127F10883C11957F1989360 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE614FDC0020EEEB487828 /* AppState.swift */; };
+		A7150A3F7F1504CBC4228E98 /* Blank.pptx in Resources */ = {isa = PBXBuildFile; fileRef = FD309E5769E79246B299E39F /* Blank.pptx */; };
+		B385956FB7679D4AB73CF3B7 /* Blank.xlsx in Resources */ = {isa = PBXBuildFile; fileRef = 5D30799D2D3612D3C9445851 /* Blank.xlsx */; };
+		BF53CFF3753EC517BCD51C05 /* TahoeFileWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5593F75F33B9A5B534DB137F /* TahoeFileWriter.m */; };
+		C9C5E225F3750567CC57EA76 /* TahoeManagedRootsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF4491FB45DEB1723035C1F /* TahoeManagedRootsStore.m */; };
+		E1361FEC6EB196E629E4778C /* TahoeFinderSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 1990F7A600B7E93189FF10CE /* TahoeFinderSync.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A2F71192700BD812F5BD736C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0623212A879657BE13BCD69B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB854AF02D5A1F39BAFB878D;
+			remoteInfo = TahoeFinderSync;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A4E51BEC78ADDB73591A9E57 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				17E560918A0E6B7E23B041FC /* TahoeFinderSync.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		02B293765D0B45E57B067D32 /* TahoeFinderSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TahoeFinderSync.h; sourceTree = "<group>"; };
+		0DCE614FDC0020EEEB487828 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		12FEEE8CAA535EB965D9C153 /* Blank.docx */ = {isa = PBXFileReference; path = Blank.docx; sourceTree = "<group>"; };
+		1990F7A600B7E93189FF10CE /* TahoeFinderSync.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TahoeFinderSync.m; sourceTree = "<group>"; };
+		2425FA67ADD41719558030B0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3A46EFACC27732569392C1F0 /* TahoeNewFileHost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TahoeNewFileHost.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EA6EC8787E70CF24C3E4D97 /* TahoeNewFileHost-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TahoeNewFileHost-Bridging-Header.h"; sourceTree = "<group>"; };
+		5593F75F33B9A5B534DB137F /* TahoeFileWriter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TahoeFileWriter.m; sourceTree = "<group>"; };
+		5D30799D2D3612D3C9445851 /* Blank.xlsx */ = {isa = PBXFileReference; path = Blank.xlsx; sourceTree = "<group>"; };
+		5DF32E9EE4067E8362D17440 /* TahoeConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TahoeConstants.m; sourceTree = "<group>"; };
+		70176A81F6997EB3B3730280 /* TahoeHostSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TahoeHostSupport.swift; sourceTree = "<group>"; };
+		771D15656EA253121B04143D /* TahoeFileWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TahoeFileWriter.h; sourceTree = "<group>"; };
+		8BF4491FB45DEB1723035C1F /* TahoeManagedRootsStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TahoeManagedRootsStore.m; sourceTree = "<group>"; };
+		DE7814F11AF188D0166292B1 /* TahoeConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TahoeConstants.h; sourceTree = "<group>"; };
+		E8E5D16BF04DD2601F676222 /* TahoeHostApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TahoeHostApp.swift; sourceTree = "<group>"; };
+		E9FE7559105C4F444B0C9A05 /* TahoeFinderSync.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TahoeFinderSync.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EFD1AABC86BC50C3FD133455 /* TahoeManagedRootsStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TahoeManagedRootsStore.h; sourceTree = "<group>"; };
+		FD309E5769E79246B299E39F /* Blank.pptx */ = {isa = PBXFileReference; path = Blank.pptx; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		51893F2277677ABA683A5796 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E9FE7559105C4F444B0C9A05 /* TahoeFinderSync.appex */,
+				3A46EFACC27732569392C1F0 /* TahoeNewFileHost.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		974DE0847CDE1789D435DF1F /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				12FEEE8CAA535EB965D9C153 /* Blank.docx */,
+				FD309E5769E79246B299E39F /* Blank.pptx */,
+				5D30799D2D3612D3C9445851 /* Blank.xlsx */,
+			);
+			name = Templates;
+			path = Assets/Templates;
+			sourceTree = "<group>";
+		};
+		987466C29FF6976F71B14BDD /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				0DCE614FDC0020EEEB487828 /* AppState.swift */,
+				2425FA67ADD41719558030B0 /* ContentView.swift */,
+				E8E5D16BF04DD2601F676222 /* TahoeHostApp.swift */,
+				70176A81F6997EB3B3730280 /* TahoeHostSupport.swift */,
+				4EA6EC8787E70CF24C3E4D97 /* TahoeNewFileHost-Bridging-Header.h */,
+			);
+			name = Sources;
+			path = App/Sources;
+			sourceTree = "<group>";
+		};
+		CAEC977C11154C0CB294752F /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				DE7814F11AF188D0166292B1 /* TahoeConstants.h */,
+				5DF32E9EE4067E8362D17440 /* TahoeConstants.m */,
+				771D15656EA253121B04143D /* TahoeFileWriter.h */,
+				5593F75F33B9A5B534DB137F /* TahoeFileWriter.m */,
+				EFD1AABC86BC50C3FD133455 /* TahoeManagedRootsStore.h */,
+				8BF4491FB45DEB1723035C1F /* TahoeManagedRootsStore.m */,
+			);
+			name = Sources;
+			path = Shared/Sources;
+			sourceTree = "<group>";
+		};
+		CD5F70469A6D04766C985FE1 = {
+			isa = PBXGroup;
+			children = (
+				987466C29FF6976F71B14BDD /* Sources */,
+				FF1DF271B65B00BE9EAE1AF8 /* Sources */,
+				CAEC977C11154C0CB294752F /* Sources */,
+				974DE0847CDE1789D435DF1F /* Templates */,
+				51893F2277677ABA683A5796 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FF1DF271B65B00BE9EAE1AF8 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				02B293765D0B45E57B067D32 /* TahoeFinderSync.h */,
+				1990F7A600B7E93189FF10CE /* TahoeFinderSync.m */,
+			);
+			name = Sources;
+			path = FinderSync/Sources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EB854AF02D5A1F39BAFB878D /* TahoeFinderSync */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7704D7054D2F7173F95E178D /* Build configuration list for PBXNativeTarget "TahoeFinderSync" */;
+			buildPhases = (
+				7D9A58041B1AEB93E852BA88 /* Sources */,
+				35450DFD3C493263381A244B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TahoeFinderSync;
+			packageProductDependencies = (
+			);
+			productName = TahoeFinderSync;
+			productReference = E9FE7559105C4F444B0C9A05 /* TahoeFinderSync.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		F0825DA361043F75BDBA4493 /* TahoeNewFileHost */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B671B7E03FD1A742FC3A9400 /* Build configuration list for PBXNativeTarget "TahoeNewFileHost" */;
+			buildPhases = (
+				F161B334784E2FD0CFB7FD65 /* Sources */,
+				A4E51BEC78ADDB73591A9E57 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DCE742818BB6F67374BA90DF /* PBXTargetDependency */,
+			);
+			name = TahoeNewFileHost;
+			packageProductDependencies = (
+			);
+			productName = TahoeNewFileHost;
+			productReference = 3A46EFACC27732569392C1F0 /* TahoeNewFileHost.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0623212A879657BE13BCD69B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					EB854AF02D5A1F39BAFB878D = {
+						DevelopmentTeam = 3MAC29ZRU9;
+						ProvisioningStyle = Manual;
+					};
+					F0825DA361043F75BDBA4493 = {
+						DevelopmentTeam = 3MAC29ZRU9;
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = D1B6C88345300978FC008408 /* Build configuration list for PBXProject "TahoeNewFile" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = CD5F70469A6D04766C985FE1;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 51893F2277677ABA683A5796 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EB854AF02D5A1F39BAFB878D /* TahoeFinderSync */,
+				F0825DA361043F75BDBA4493 /* TahoeNewFileHost */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		35450DFD3C493263381A244B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7DBC5FE83AADB6A9B91A74B1 /* Blank.docx in Resources */,
+				A7150A3F7F1504CBC4228E98 /* Blank.pptx in Resources */,
+				B385956FB7679D4AB73CF3B7 /* Blank.xlsx in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7D9A58041B1AEB93E852BA88 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29662D41426055F72E71F5F0 /* TahoeConstants.m in Sources */,
+				2DBFE33BF51CFC53B282D837 /* TahoeFileWriter.m in Sources */,
+				E1361FEC6EB196E629E4778C /* TahoeFinderSync.m in Sources */,
+				0E4433E691A65A2A83BA025E /* TahoeManagedRootsStore.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F161B334784E2FD0CFB7FD65 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A127F10883C11957F1989360 /* AppState.swift in Sources */,
+				6F4C00FE231D35EBE99FD23D /* ContentView.swift in Sources */,
+				21400E463085C07E3DFBC206 /* TahoeConstants.m in Sources */,
+				BF53CFF3753EC517BCD51C05 /* TahoeFileWriter.m in Sources */,
+				4B2ED893C649703C49A7DC86 /* TahoeHostApp.swift in Sources */,
+				7C12688C0604271F83DF36EC /* TahoeHostSupport.swift in Sources */,
+				C9C5E225F3750567CC57EA76 /* TahoeManagedRootsStore.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DCE742818BB6F67374BA90DF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB854AF02D5A1F39BAFB878D /* TahoeFinderSync */;
+			targetProxy = A2F71192700BD812F5BD736C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2BB0096F4757858E0C8A0DDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Configs/TahoeFinderSync.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development: mengxiaoyan413@gmail.com (3MAC29ZRU9)";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 3MAC29ZRU9;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Shared/Sources",
+				);
+				INFOPLIST_FILE = "Configs/TahoeFinderSync-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					AppKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.weiciruan.tahoe.host.findersync;
+				PRODUCT_NAME = TahoeFinderSync;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		8108C53B4DB8D74FDABB0DFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_EXPLICIT_MODULES = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development: mengxiaoyan413@gmail.com (3MAC29ZRU9)";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3MAC29ZRU9;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		99329076F47D06AB0D98C9D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Configs/TahoeFinderSync.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development: mengxiaoyan413@gmail.com (3MAC29ZRU9)";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 3MAC29ZRU9;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Shared/Sources",
+				);
+				INFOPLIST_FILE = "Configs/TahoeFinderSync-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					AppKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.weiciruan.tahoe.host.findersync;
+				PRODUCT_NAME = TahoeFinderSync;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		9C63AA405DD042B19432F5B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_EXPLICIT_MODULES = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development: mengxiaoyan413@gmail.com (3MAC29ZRU9)";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3MAC29ZRU9;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		B5806F13B6321A62F253C5EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Configs/TahoeNewFileHost.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development: mengxiaoyan413@gmail.com (3MAC29ZRU9)";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 3MAC29ZRU9;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Shared/Sources",
+				);
+				INFOPLIST_KEY_CFBundleDisplayName = "Tahoe New File";
+				INFOPLIST_KEY_LSMinimumSystemVersion = "$(MACOSX_DEPLOYMENT_TARGET)";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.weiciruan.tahoe.host;
+				PRODUCT_NAME = TahoeNewFileHost;
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "App/Sources/TahoeNewFileHost-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		BB8FCEB97D3F401CDB87F60C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Configs/TahoeNewFileHost.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development: mengxiaoyan413@gmail.com (3MAC29ZRU9)";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 3MAC29ZRU9;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Shared/Sources",
+				);
+				INFOPLIST_KEY_CFBundleDisplayName = "Tahoe New File";
+				INFOPLIST_KEY_LSMinimumSystemVersion = "$(MACOSX_DEPLOYMENT_TARGET)";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.weiciruan.tahoe.host;
+				PRODUCT_NAME = TahoeNewFileHost;
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "App/Sources/TahoeNewFileHost-Bridging-Header.h";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7704D7054D2F7173F95E178D /* Build configuration list for PBXNativeTarget "TahoeFinderSync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99329076F47D06AB0D98C9D6 /* Debug */,
+				2BB0096F4757858E0C8A0DDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B671B7E03FD1A742FC3A9400 /* Build configuration list for PBXNativeTarget "TahoeNewFileHost" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB8FCEB97D3F401CDB87F60C /* Debug */,
+				B5806F13B6321A62F253C5EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D1B6C88345300978FC008408 /* Build configuration list for PBXProject "TahoeNewFile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C63AA405DD042B19432F5B1 /* Debug */,
+				8108C53B4DB8D74FDABB0DFB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0623212A879657BE13BCD69B /* Project object */;
+}
