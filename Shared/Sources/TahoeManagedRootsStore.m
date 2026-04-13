@@ -10,27 +10,51 @@ static NSString * const TahoeManagedRootBookmarkKey = @"bookmark";
 + (NSURL *)storageFileURL {
     NSURL *baseDirectory = [NSFileManager.defaultManager containerURLForSecurityApplicationGroupIdentifier:TahoeAppGroupIdentifier];
     if (baseDirectory == nil) {
-        NSLog(@"[TahoeManagedRootsStore] App group container unavailable for %@, falling back to Application Support.", TahoeAppGroupIdentifier);
-        baseDirectory = [NSFileManager.defaultManager URLsForDirectory:NSApplicationSupportDirectory
-                                                            inDomains:NSUserDomainMask].firstObject;
-    } else {
-        NSLog(@"[TahoeManagedRootsStore] Using app group container at %@", baseDirectory.path);
+        return [self legacyStorageFileURL];
     }
 
     NSURL *directory = [baseDirectory URLByAppendingPathComponent:@"TahoeNewFile" isDirectory:YES];
     NSError *directoryError = nil;
-    BOOL created = [NSFileManager.defaultManager createDirectoryAtURL:directory
-                                          withIntermediateDirectories:YES
-                                                           attributes:nil
-                                                                error:&directoryError];
-    if (!created && directoryError != nil) {
-        NSLog(@"[TahoeManagedRootsStore] Failed to create storage directory %@: %@", directory.path, directoryError);
+    [NSFileManager.defaultManager createDirectoryAtURL:directory
+                           withIntermediateDirectories:YES
+                                            attributes:nil
+                                                 error:&directoryError];
+    if (directoryError != nil) {
+        NSLog(@"[TahoeManagedRootsStore] Failed to create app group storage directory %@: %@", directory.path, directoryError);
     }
     return [directory URLByAppendingPathComponent:TahoeManagedRootsFilename];
 }
 
++ (NSURL *)legacyStorageFileURL {
+    NSURL *baseDirectory = [NSFileManager.defaultManager URLsForDirectory:NSApplicationSupportDirectory
+                                                                inDomains:NSUserDomainMask].firstObject;
+    NSURL *directory = [baseDirectory URLByAppendingPathComponent:@"TahoeNewFile" isDirectory:YES];
+    return [directory URLByAppendingPathComponent:TahoeManagedRootsFilename];
+}
+
++ (NSUserDefaults *)sharedDefaults {
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:TahoeAppGroupIdentifier];
+    if (defaults == nil) {
+        NSLog(@"[TahoeManagedRootsStore] Falling back to standard user defaults for %@", TahoeAppGroupIdentifier);
+        defaults = NSUserDefaults.standardUserDefaults;
+    }
+    return defaults;
+}
+
 + (NSArray<NSDictionary<NSString *, id> *> *)storedItems {
-    NSArray<NSDictionary<NSString *, id> *> *items = [NSArray arrayWithContentsOfURL:[self storageFileURL]];
+    id rawItems = [[self sharedDefaults] arrayForKey:TahoeManagedRootsFilename];
+    NSArray<NSDictionary<NSString *, id> *> *items = [rawItems isKindOfClass:NSArray.class] ? rawItems : nil;
+    if ((items == nil || items.count == 0) && [NSArray arrayWithContentsOfURL:[self storageFileURL]].count > 0) {
+        items = [NSArray arrayWithContentsOfURL:[self storageFileURL]];
+    }
+    if ((items == nil || items.count == 0) && [NSFileManager.defaultManager fileExistsAtPath:[self legacyStorageFileURL].path]) {
+        NSArray<NSDictionary<NSString *, id> *> *legacyItems = [NSArray arrayWithContentsOfURL:[self legacyStorageFileURL]];
+        if ([legacyItems isKindOfClass:NSArray.class] && legacyItems.count > 0) {
+            NSLog(@"[TahoeManagedRootsStore] Migrating %lu legacy managed root item(s) from %@", (unsigned long)legacyItems.count, [self legacyStorageFileURL].path);
+            [self saveItems:legacyItems];
+            items = legacyItems;
+        }
+    }
     if (![items isKindOfClass:NSArray.class]) {
         return @[];
     }
@@ -60,9 +84,11 @@ static NSString * const TahoeManagedRootBookmarkKey = @"bookmark";
 }
 
 + (void)saveItems:(NSArray<NSDictionary<NSString *, id> *> *)items {
-    NSURL *fileURL = [self storageFileURL];
-    BOOL success = [items writeToURL:fileURL atomically:YES];
-    NSLog(@"[TahoeManagedRootsStore] Saving %lu managed root item(s) to %@ -> %@", (unsigned long)items.count, fileURL.path, success ? @"success" : @"failure");
+    NSUserDefaults *defaults = [self sharedDefaults];
+    [defaults setObject:items forKey:TahoeManagedRootsFilename];
+    BOOL success = [defaults synchronize];
+    NSLog(@"[TahoeManagedRootsStore] Saving %lu managed root item(s) to defaults suite %@ -> %@", (unsigned long)items.count, TahoeAppGroupIdentifier, success ? @"success" : @"failure");
+    [items writeToURL:[self storageFileURL] atomically:YES];
 }
 
 + (nullable NSURL *)resolvedURLForItem:(NSDictionary<NSString *, id> *)item {
@@ -196,10 +222,10 @@ static NSString * const TahoeManagedRootBookmarkKey = @"bookmark";
 }
 
 + (void)removeAllManagedDirectories {
-    NSURL *fileURL = [self storageFileURL];
-    if ([NSFileManager.defaultManager fileExistsAtPath:fileURL.path]) {
-        [NSFileManager.defaultManager removeItemAtURL:fileURL error:nil];
-    }
+    NSUserDefaults *defaults = [self sharedDefaults];
+    [defaults removeObjectForKey:TahoeManagedRootsFilename];
+    [defaults synchronize];
+    [[NSFileManager defaultManager] removeItemAtURL:[self storageFileURL] error:nil];
     [self postManagedRootsDidChangeNotification];
 }
 
