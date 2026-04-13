@@ -3,10 +3,17 @@
 NS_ASSUME_NONNULL_BEGIN
 
 FOUNDATION_EXPORT NSString * const TahoeFinderBundleIdentifier;
+FOUNDATION_EXPORT NSString * const TahoeHostBundleIdentifier;
 FOUNDATION_EXPORT NSString * const TahoeAppGroupIdentifier;
 FOUNDATION_EXPORT NSString * const TahoeMenuItemMarker;
 FOUNDATION_EXPORT NSString * const TahoeManagedRootsFilename;
 FOUNDATION_EXPORT NSString * const TahoeManagedRootsDidChangeNotification;
+FOUNDATION_EXPORT NSString * const TahoeCreateRequestNotification;
+FOUNDATION_EXPORT NSString * const TahoeCreateRequestDefaultsKeyPrefix;
+FOUNDATION_EXPORT NSString * const TahoeCreateResponseDefaultsKeyPrefix;
+FOUNDATION_EXPORT NSString * const TahoeRequestIdentifierKey;
+FOUNDATION_EXPORT NSString * const TahoeRequestDirectoryPathKey;
+FOUNDATION_EXPORT NSString * const TahoeRequestKindKey;
 FOUNDATION_EXPORT NSString * const TahoeDocumentKindText;
 FOUNDATION_EXPORT NSString * const TahoeDocumentKindWord;
 FOUNDATION_EXPORT NSString * const TahoeDocumentKindExcel;

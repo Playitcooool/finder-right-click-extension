@@ -3,7 +3,7 @@ import Foundation
 
 @MainActor
 final class TahoeAppState: ObservableObject {
-    @Published var status: String = "先启用 Finder 扩展，再添加要接管右键菜单的目录。位置在系统设置的 Finder Extensions，不是 File Provider。"
+    @Published var status: String = "先启用 Finder 扩展，再添加要接管右键菜单的目录。位置在系统设置的 Finder Extensions，不是 File Provider。宿主启动后会常驻处理新建请求。"
     @Published var managedPaths: [String] = []
     @Published var extensionEnabled: Bool = false
 
@@ -42,7 +42,7 @@ final class TahoeAppState: ObservableObject {
         do {
             try addManagedFolder(url)
             refresh()
-            status = "已添加受控目录。必要时点一次 Restart Finder。"
+            status = "已添加受控目录。必要时点一次 Restart Finder。之后关窗口不会停止宿主服务。"
         } catch {
             status = error.localizedDescription
         }

@@ -1,10 +1,17 @@
 #import "TahoeConstants.h"
 
 NSString * const TahoeFinderBundleIdentifier = @"com.apple.finder";
+NSString * const TahoeHostBundleIdentifier = @"com.weiciruan.tahoe.host";
 NSString * const TahoeAppGroupIdentifier = @"group.com.weiciruan.tahoe.newfile";
 NSString * const TahoeMenuItemMarker = @"com.weiciruan.tahoe.new-file";
 NSString * const TahoeManagedRootsFilename = @"managed-roots.plist";
 NSString * const TahoeManagedRootsDidChangeNotification = @"com.weiciruan.tahoe.ManagedRootsDidChange";
+NSString * const TahoeCreateRequestNotification = @"com.weiciruan.tahoe.CreateRequest";
+NSString * const TahoeCreateRequestDefaultsKeyPrefix = @"create-request.";
+NSString * const TahoeCreateResponseDefaultsKeyPrefix = @"create-response.";
+NSString * const TahoeRequestIdentifierKey = @"requestID";
+NSString * const TahoeRequestDirectoryPathKey = @"directoryPath";
+NSString * const TahoeRequestKindKey = @"kindName";
 NSString * const TahoeDocumentKindText = @"txt";
 NSString * const TahoeDocumentKindWord = @"docx";
 NSString * const TahoeDocumentKindExcel = @"xlsx";

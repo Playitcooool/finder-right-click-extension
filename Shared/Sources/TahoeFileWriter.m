@@ -50,6 +50,7 @@
     }
 
     if (error != nil) {
+        NSLog(@"[TahoeFileWriter] Failed to create %@ at %@: %@", kindName, targetPath, error);
         return @{
             @"success": @NO,
             @"errorDescription": error.localizedDescription ?: @"文件创建失败。"

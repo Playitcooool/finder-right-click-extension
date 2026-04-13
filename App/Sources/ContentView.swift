@@ -8,7 +8,7 @@ struct ContentView: View {
             Text("Tahoe New File")
                 .font(.system(size: 28, weight: .semibold))
 
-            Text("当前版本改为官方 Finder Sync 路线，不再尝试全局注入。只有你在宿主 App 里添加过的目录及其子目录，才会在 Finder 空白处右键直接出现“新建文本文件 / Word / Excel / PPT”一级菜单。")
+            Text("当前版本改为官方 Finder Sync 路线，不再尝试全局注入。只有你在宿主 App 里添加过的目录及其子目录，才会在 Finder 空白处右键直接出现“新建文本文件 / Word / Excel / PPT”一级菜单。宿主在启动后会常驻处理创建请求，关窗口不会停止服务。")
                 .fixedSize(horizontal: false, vertical: true)
 
             GroupBox("Extension Status") {

@@ -102,13 +102,20 @@ static NSString * const TahoeManagedRootBookmarkKey = @"bookmark";
                                            bookmarkDataIsStale:&stale
                                                          error:&error];
         if (resolvedURL != nil) {
-            return resolvedURL.URLByStandardizingPath;
+            if (stale) {
+                NSLog(@"[TahoeManagedRootsStore] Bookmark for %@ is stale.", resolvedURL.path);
+            }
+            // Keep the original resolved security-scoped URL. Standardizing it can
+            // produce a plain file URL that no longer carries the security scope.
+            return resolvedURL;
         }
+        NSLog(@"[TahoeManagedRootsStore] Failed to resolve bookmark for %@: %@", item[TahoeManagedRootPathKey], error);
+        return nil;
     }
 
     NSString *path = item[TahoeManagedRootPathKey];
     if ([path isKindOfClass:NSString.class] && path.length > 0) {
-        return [NSURL fileURLWithPath:path isDirectory:YES].URLByStandardizingPath;
+        return [NSURL fileURLWithPath:path isDirectory:YES];
     }
     return nil;
 }
@@ -148,11 +155,6 @@ static NSString * const TahoeManagedRootBookmarkKey = @"bookmark";
         return NO;
     }
 
-    NSArray<NSString *> *existingPaths = [self managedDirectoryPaths];
-    if ([existingPaths containsObject:normalizedURL.path]) {
-        return YES;
-    }
-
     BOOL startedAccess = [normalizedURL startAccessingSecurityScopedResource];
     NSError *bookmarkError = nil;
     NSData *bookmarkData = [normalizedURL bookmarkDataWithOptions:NSURLBookmarkCreationWithSecurityScope
@@ -175,6 +177,12 @@ static NSString * const TahoeManagedRootBookmarkKey = @"bookmark";
     NSLog(@"[TahoeManagedRootsStore] Created bookmark for %@ (%lu bytes)", normalizedURL.path, (unsigned long)bookmarkData.length);
 
     NSMutableArray<NSDictionary<NSString *, id> *> *updated = [[self storedItems] mutableCopy];
+    NSIndexSet *existingIndexes = [updated indexesOfObjectsPassingTest:^BOOL(NSDictionary<NSString *, id> * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
+        return [item[TahoeManagedRootPathKey] isEqualToString:normalizedURL.path];
+    }];
+    if (existingIndexes.count > 0) {
+        [updated removeObjectsAtIndexes:existingIndexes];
+    }
     [updated addObject:@{
         TahoeManagedRootPathKey: normalizedURL.path,
         TahoeManagedRootBookmarkKey: bookmarkData
@@ -189,22 +197,37 @@ static NSString * const TahoeManagedRootBookmarkKey = @"bookmark";
     NSLog(@"[TahoeManagedRootsStore] Resolving managed root for %@", directoryPath);
     NSURL *bestURL = nil;
     NSUInteger bestLength = 0;
+    BOOL matchedInvalidBookmark = NO;
 
-    for (NSURL *candidateURL in [self managedDirectoryURLs]) {
-        NSString *rootPath = candidateURL.path ?: @"";
+    for (NSDictionary<NSString *, id> *item in [self storedItems]) {
+        NSString *rootPath = [item[TahoeManagedRootPathKey] isKindOfClass:NSString.class] ? item[TahoeManagedRootPathKey] : @"";
         BOOL exactMatch = [directoryPath isEqualToString:rootPath];
         BOOL descendantMatch = [directoryPath hasPrefix:[rootPath stringByAppendingString:@"/"]];
-        if ((exactMatch || descendantMatch) && rootPath.length > bestLength) {
+        if (!(exactMatch || descendantMatch) || rootPath.length <= bestLength) {
+            continue;
+        }
+
+        NSURL *candidateURL = [self resolvedURLForItem:item];
+        if (candidateURL != nil) {
             bestURL = candidateURL;
             bestLength = rootPath.length;
+        } else {
+            matchedInvalidBookmark = YES;
         }
     }
 
     if (bestURL == nil && error != NULL) {
-        NSLog(@"[TahoeManagedRootsStore] No managed root found for %@", directoryPath);
-        *error = [NSError errorWithDomain:NSCocoaErrorDomain
-                                     code:NSUserCancelledError
-                                 userInfo:@{NSLocalizedDescriptionKey: @"请先在宿主 App 中添加受控目录。"}];
+        if (matchedInvalidBookmark) {
+            NSLog(@"[TahoeManagedRootsStore] Managed root bookmark is invalid for %@", directoryPath);
+            *error = [NSError errorWithDomain:NSCocoaErrorDomain
+                                         code:NSUserCancelledError
+                                     userInfo:@{NSLocalizedDescriptionKey: @"该目录的授权已失效，请在宿主 App 中重新添加该目录。"}];
+        } else {
+            NSLog(@"[TahoeManagedRootsStore] No managed root found for %@", directoryPath);
+            *error = [NSError errorWithDomain:NSCocoaErrorDomain
+                                         code:NSUserCancelledError
+                                     userInfo:@{NSLocalizedDescriptionKey: @"请先在宿主 App 中添加受控目录。"}];
+        }
     } else if (bestURL != nil) {
         NSLog(@"[TahoeManagedRootsStore] Matched managed root %@ for %@", bestURL.path, directoryPath);
     }

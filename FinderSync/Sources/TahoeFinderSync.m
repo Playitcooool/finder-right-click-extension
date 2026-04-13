@@ -3,7 +3,6 @@
 #import <AppKit/AppKit.h>
 
 #import "TahoeConstants.h"
-#import "TahoeFileWriter.h"
 #import "TahoeManagedRootsStore.h"
 
 @interface TahoeFinderSync ()
@@ -92,12 +91,7 @@
         return;
     }
 
-    BOOL startedAccess = [scopedRootURL startAccessingSecurityScopedResource];
-    TahoeFileWriter *writer = [[TahoeFileWriter alloc] initWithTemplateBundle:[NSBundle bundleForClass:self.class]];
-    NSDictionary<NSString *, id> *result = [writer createDocumentAtDirectoryPath:directoryPath kindName:kindName];
-    if (startedAccess) {
-        [scopedRootURL stopAccessingSecurityScopedResource];
-    }
+    NSDictionary<NSString *, id> *result = [self requestHostCreateDocumentAtDirectoryPath:directoryPath kindName:kindName];
 
     if ([result[@"success"] boolValue]) {
         NSString *createdPath = result[@"createdPath"];
@@ -105,6 +99,7 @@
             [NSWorkspace.sharedWorkspace activateFileViewerSelectingURLs:@[[NSURL fileURLWithPath:createdPath]]];
         }
     } else {
+        NSLog(@"[TahoeFinderSync] Create failed for %@ in %@: %@", kindName, directoryPath, result[@"errorDescription"]);
         [self presentError:result[@"errorDescription"] ?: @"文件创建失败。"];
     }
 }
@@ -154,6 +149,99 @@
         [alert addButtonWithTitle:@"好"];
         [alert runModal];
     });
+}
+
+- (NSDictionary<NSString *, id> *)requestHostCreateDocumentAtDirectoryPath:(NSString *)directoryPath
+                                                                  kindName:(NSString *)kindName {
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:TahoeAppGroupIdentifier];
+    if (defaults == nil) {
+        return @{
+            @"success": @NO,
+            @"errorDescription": @"无法访问共享容器。"
+        };
+    }
+
+    [self ensureHostApplicationRunning];
+
+    NSString *requestID = NSUUID.UUID.UUIDString;
+    NSString *requestKey = [TahoeCreateRequestDefaultsKeyPrefix stringByAppendingString:requestID];
+    NSString *responseKey = [TahoeCreateResponseDefaultsKeyPrefix stringByAppendingString:requestID];
+    NSDictionary<NSString *, id> *payload = @{
+        TahoeRequestIdentifierKey: requestID,
+        TahoeRequestDirectoryPathKey: directoryPath,
+        TahoeRequestKindKey: kindName
+    };
+
+    [defaults removeObjectForKey:responseKey];
+    [defaults setObject:payload forKey:requestKey];
+    [defaults synchronize];
+
+    [[NSDistributedNotificationCenter defaultCenter] postNotificationName:TahoeCreateRequestNotification
+                                                                   object:nil
+                                                                 userInfo:@{ TahoeRequestIdentifierKey: requestID }
+                                                       deliverImmediately:YES];
+
+    NSDate *deadline = [NSDate dateWithTimeIntervalSinceNow:8.0];
+    NSDictionary<NSString *, id> *response = nil;
+    while ([deadline timeIntervalSinceNow] > 0) {
+        response = [defaults dictionaryForKey:responseKey];
+        if ([response isKindOfClass:NSDictionary.class]) {
+            break;
+        }
+        [NSThread sleepForTimeInterval:0.1];
+    }
+
+    [defaults removeObjectForKey:requestKey];
+    [defaults removeObjectForKey:responseKey];
+    [defaults synchronize];
+
+    if ([response isKindOfClass:NSDictionary.class]) {
+        return response;
+    }
+
+    NSLog(@"[TahoeFinderSync] Timed out waiting for host response requestID=%@", requestID);
+    return @{
+        @"success": @NO,
+        @"errorDescription": @"宿主服务未响应，请打开 Tahoe New File Host 后重试。"
+    };
+}
+
+- (void)ensureHostApplicationRunning {
+    if ([NSRunningApplication runningApplicationsWithBundleIdentifier:TahoeHostBundleIdentifier].count > 0) {
+        return;
+    }
+
+    NSURL *hostURL = [self hostApplicationURL];
+    if (hostURL == nil) {
+        NSLog(@"[TahoeFinderSync] Failed to locate host application bundle.");
+        return;
+    }
+
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    NSWorkspaceOpenConfiguration *configuration = [NSWorkspaceOpenConfiguration configuration];
+    configuration.activates = NO;
+    [NSWorkspace.sharedWorkspace openApplicationAtURL:hostURL
+                                        configuration:configuration
+                                    completionHandler:^(__unused NSRunningApplication * _Nullable app, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"[TahoeFinderSync] Failed to launch host app: %@", error);
+        }
+        dispatch_semaphore_signal(semaphore);
+    }];
+    dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)));
+}
+
+- (nullable NSURL *)hostApplicationURL {
+    NSURL *bundleURL = [NSBundle bundleForClass:self.class].bundleURL;
+    if (bundleURL == nil) {
+        return nil;
+    }
+
+    NSURL *appURL = bundleURL;
+    for (NSUInteger index = 0; index < 3; index += 1) {
+        appURL = [appURL URLByDeletingLastPathComponent];
+    }
+    return appURL;
 }
 
 @end

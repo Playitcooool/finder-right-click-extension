@@ -81,3 +81,73 @@ enum TahoeHostSupport {
         }
     }
 }
+
+final class TahoeRequestServer {
+    private let defaults = UserDefaults(suiteName: TahoeAppGroupIdentifier)
+    private let writer = TahoeFileWriter(templateBundle: .main)
+
+    init() {
+        DistributedNotificationCenter.default().addObserver(
+            self,
+            selector: #selector(handleCreateRequest(_:)),
+            name: .TahoeCreateRequest,
+            object: nil
+        )
+    }
+
+    deinit {
+        DistributedNotificationCenter.default().removeObserver(self)
+    }
+
+    @objc private func handleCreateRequest(_ notification: Notification) {
+        guard let requestID = notification.userInfo?[TahoeRequestIdentifierKey] as? String,
+              !requestID.isEmpty else {
+            return
+        }
+        processRequest(requestID: requestID)
+    }
+
+    private func processRequest(requestID: String) {
+        guard let defaults else {
+            return
+        }
+
+        let requestKey = TahoeCreateRequestDefaultsKeyPrefix + requestID
+        let responseKey = TahoeCreateResponseDefaultsKeyPrefix + requestID
+        guard let request = defaults.dictionary(forKey: requestKey),
+              let directoryPath = request[TahoeRequestDirectoryPathKey] as? String,
+              let kindName = request[TahoeRequestKindKey] as? String else {
+            return
+        }
+
+        NSLog("[TahoeHost] Processing create request id=%@ kind=%@ directory=%@", requestID, kindName, directoryPath)
+        let scopedRootURL: URL
+        do {
+            scopedRootURL = try TahoeManagedRootsStore.bestMatchingManagedRootURL(forDirectoryPath: directoryPath)
+        } catch {
+            let response = [
+                "success": false,
+                "errorDescription": error.localizedDescription
+            ] as [String : Any]
+            defaults.set(response, forKey: responseKey)
+            defaults.synchronize()
+            return
+        }
+
+        let startedAccess = scopedRootURL.startAccessingSecurityScopedResource()
+        NSLog("[TahoeHost] startAccessingSecurityScopedResource root=%@ started=%@", scopedRootURL.path, startedAccess ? "YES" : "NO")
+        let result = writer.createDocument(atDirectoryPath: directoryPath, kindName: kindName)
+        if startedAccess {
+            scopedRootURL.stopAccessingSecurityScopedResource()
+        }
+
+        defaults.set(result, forKey: responseKey)
+        defaults.synchronize()
+    }
+}
+
+final class TahoeAppDelegate: NSObject, NSApplicationDelegate {
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        false
+    }
+}
